@@ -10,11 +10,20 @@ connectDB();
 
 const app = express();
 
+const corsOptions = {
+    origin: "http://localhost:5173", // Allow only this origin
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allowed HTTP methods
+    credentials: true, // Allow credentials like cookies or authorization headers
+  };
+  
+app.use(cors(corsOptions));
+
 // Middleware
 app.use(express.json());
 
 // Routes
 app.use("/api/users", userRoutes); // User routes for admin and employee
+app.use("/api/suppliers", supplierRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
