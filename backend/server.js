@@ -18,12 +18,15 @@ const corsOptions = {
   
 app.use(cors(corsOptions));
 
+app.use("/uploads", express.static("uploads"));
+
 // Middleware
 app.use(express.json());
 
 // Routes
 app.use("/api/users", userRoutes); // User routes for admin and employee
 app.use("/api/suppliers", supplierRoutes);
+app.use("/api/products", productRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
