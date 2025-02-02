@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 
 import connectDB from "./config/db.js";
-
+import cors from "cors";
 import userRoutes from "./routes/userRoutes.js";
 import supplierRoutes from "./routes/supplierRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
@@ -14,11 +14,11 @@ connectDB();
 const app = express();
 
 const corsOptions = {
-    origin: "http://localhost:5173", // Allow only this origin
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allowed HTTP methods
-    credentials: true, // Allow credentials like cookies or authorization headers
-  };
-  
+  origin: ["http://localhost:5173","http://localhost:5174","http://localhost:5175"], // Allow only this origin
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allowed HTTP methods
+  credentials: true, // Allow credentials like cookies or authorization headers
+};
+
 app.use(cors(corsOptions));
 
 app.use("/uploads", express.static("uploads"));
