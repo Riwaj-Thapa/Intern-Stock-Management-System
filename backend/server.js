@@ -4,6 +4,9 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 
 import userRoutes from "./routes/userRoutes.js";
+import supplierRoutes from "./routes/supplierRoutes.js";
+import productRoutes from "./routes/productRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
 
 dotenv.config();
 connectDB();
@@ -24,9 +27,10 @@ app.use("/uploads", express.static("uploads"));
 app.use(express.json());
 
 // Routes
-app.use("/api/users", userRoutes); // User routes for admin and employee
+app.use("/api/users", userRoutes);
 app.use("/api/suppliers", supplierRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/orders",orderRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
