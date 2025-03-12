@@ -12,13 +12,10 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    console.log("Submitting form with:", formData); // Debugging
   
     try {
       await login(formData.email, formData.password);
-      console.log("Login successful!"); // Debugging
     } catch (error) {
-      console.error("Login error:", error); // Debugging
       setError(error.message || "Something went wrong");
     }
   };
