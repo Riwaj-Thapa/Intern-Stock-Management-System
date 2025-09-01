@@ -18,11 +18,15 @@ const app = express();
 app.use(express.json());
 
 const corsOptions = {
-    origin: ["http://localhost:5173","http://localhost:5174","http://localhost:5175"], // Allow only this origin
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allowed HTTP methods
-    credentials: true, // Allow credentials like cookies or authorization headers
-  };
-  
+  origin: [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "http://localhost:5175",
+  ], // Allow only this origin
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allowed HTTP methods
+  credentials: true, // Allow credentials like cookies or authorization headers
+};
+
 app.use(cors(corsOptions));
 
 app.use("/uploads", express.static("uploads"));
@@ -33,6 +37,10 @@ app.use("/api/suppliers", supplierRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/dashboard", dashboardRoutes);
+
+app.get("/", (req, res) => {
+  res.send("Server is running");
+});
 
 // Start the server
 const PORT = process.env.PORT || 5000;
