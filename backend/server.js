@@ -17,13 +17,6 @@ const app = express();
 // Middleware
 app.use(express.json());
 
-const corsOptions = {
-  origin: ["*"], // Allow only this origin
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allowed HTTP methods
-  credentials: true, // Allow credentials like cookies or authorization headers
-};
-
-app.use(cors(corsOptions));
 
 app.use("/uploads", express.static("uploads"));
 
