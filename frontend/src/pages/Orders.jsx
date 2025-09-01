@@ -130,8 +130,8 @@ function Orders() {
       if (!token) throw new Error("No token found");
 
       const url = editingOrder
-        ? `http://localhost:8000/api/orders/${editingOrder._id}`
-        : "http://localhost:8000/api/orders";
+        ? `${import.meta.env.VITE_BASEURL}/api/orders/${editingOrder._id}`
+        : `${import.meta.env.VITE_BASEURL}/api/orders`;
       const method = editingOrder ? "PUT" : "POST";
 
       const response = await fetch(url, {
