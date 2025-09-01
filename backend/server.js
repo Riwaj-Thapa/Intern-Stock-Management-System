@@ -23,9 +23,7 @@ app.use(
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
-);
-
-app.use(cors(corsOptions));
+)
 
 app.use("/uploads", express.static("uploads"));
 
