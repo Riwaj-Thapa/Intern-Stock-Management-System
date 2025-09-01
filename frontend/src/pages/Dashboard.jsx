@@ -37,7 +37,7 @@ function Dashboard() {
 
   const fetchDashboardData = async (token) => {
     try {
-      const response = await fetch("http://localhost:8000/api/dashboard", {
+      const response = await fetch(`${import.meta.env.VITE_BASEURL}/api/dashboard`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!response.ok) {

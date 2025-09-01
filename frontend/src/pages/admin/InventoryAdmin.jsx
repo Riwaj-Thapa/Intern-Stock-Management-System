@@ -31,7 +31,7 @@ const InventoryAdmin = () => {
       return;
     }
     try {
-      const response = await fetch("http://localhost:8000/api/products", {
+      const response = await fetch(`${import.meta.env.VITE_BASEURL}/api/products`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!response.ok) throw new Error(`Error: ${response.status}`);
@@ -50,7 +50,7 @@ const InventoryAdmin = () => {
       return;
     }
     try {
-      const response = await fetch("http://localhost:8000/api/suppliers", {
+      const response = await fetch(`${import.meta.env.VITE_BASEURL}/api/suppliers`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!response.ok) throw new Error(`Error: ${response.status}`);
@@ -92,8 +92,8 @@ const InventoryAdmin = () => {
     }
     try {
       const url = editingProduct
-        ? `http://localhost:8000/api/products/${editingProduct._id}`
-        : "http://localhost:8000/api/products";
+        ? `${import.meta.env.VITE_BASEURL}/api/products/${editingProduct._id}`
+        : `${import.meta.env.VITE_BASEURL}/api/products`;
       const method = editingProduct ? "PUT" : "POST";
 
       const formDataToSend = new FormData();
@@ -145,7 +145,7 @@ const InventoryAdmin = () => {
     if (window.confirm("Are you sure you want to delete this product?")) {
       try {
         const response = await fetch(
-          `http://localhost:8000/api/products/${id}`,
+          `${import.meta.env.VITE_BASEURL}/api/products/${id}`,
           {
             method: "DELETE",
             headers: { Authorization: `Bearer ${token}` },

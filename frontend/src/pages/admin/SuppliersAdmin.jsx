@@ -23,7 +23,7 @@ const SuppliersAdmin = () => {
   const fetchSuppliers = async () => {
     const token = localStorage.getItem("token");
     try {
-      const response = await fetch("http://localhost:8000/api/suppliers/", {
+      const response = await fetch(`${import.meta.env.VITE_BASEURL}/api/suppliers/`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -48,8 +48,8 @@ const SuppliersAdmin = () => {
     const token = localStorage.getItem("token");
     try {
       const url = editingSupplier
-        ? `http://localhost:8000/api/suppliers/${editingSupplier._id}`
-        : "http://localhost:8000/api/suppliers";
+        ? `${import.meta.env.VITE_BASEURL}/api/suppliers/${editingSupplier._id}`
+        : `${import.meta.env.VITE_BASEURL}/api/suppliers`;
 
       const method = editingSupplier ? "PUT" : "POST";
 
@@ -83,7 +83,7 @@ const SuppliersAdmin = () => {
     if (window.confirm("Are you sure you want to delete this supplier?")) {
       try {
         const response = await fetch(
-          `http://localhost:8000/api/suppliers/${id}`,
+          `${import.meta.env.VITE_BASEURL}/api/suppliers/${id}`,
           {
             method: "DELETE",
             headers: {

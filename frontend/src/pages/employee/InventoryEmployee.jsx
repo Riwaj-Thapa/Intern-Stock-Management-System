@@ -27,7 +27,7 @@ const InventoryEmployee = () => {
       return;
     }
     try {
-      const response = await fetch("http://localhost:8000/api/products", {
+      const response = await fetch(`${import.meta.env.VITE_BASEURL}/api/products`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!response.ok) throw new Error(`Error: ${response.status}`);
@@ -45,7 +45,7 @@ const InventoryEmployee = () => {
       return;
     }
     try {
-      const response = await fetch("http://localhost:8000/api/suppliers", {
+      const response = await fetch(`${import.meta.env.VITE_BASEURL}/api/suppliers`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!response.ok) throw new Error(`Error: ${response.status}`);
@@ -70,8 +70,8 @@ const InventoryEmployee = () => {
     }
     try {
       const url = editingProduct
-        ? `http://localhost:8000/api/products/${editingProduct._id}`
-        : "http://localhost:8000/api/products";
+        ? `${import.meta.env.VITE_BASEURL}/api/products/${editingProduct._id}`
+        : `${import.meta.env.VITE_BASEURL}/api/products`;
       const method = editingProduct ? "PUT" : "POST";
 
       const response = await fetch(url, {

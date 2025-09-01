@@ -15,7 +15,7 @@ const LowStockPage = () => {
       }
 
       try {
-        const response = await fetch("http://localhost:8000/api/products", {
+        const response = await fetch(`${import.meta.env.VITE_BASEURL}/api/products`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

@@ -29,7 +29,7 @@ export default function Employees() {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/api/users/employees", {
+      const response = await fetch(`${import.meta.env.VITE_BASEURL}/api/users/employees`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -62,7 +62,7 @@ export default function Employees() {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/api/users/register", {
+      const response = await fetch(`${import.meta.env.VITE_BASEURL}/api/users/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -90,7 +90,7 @@ export default function Employees() {
     try {
       const newStatus = currentStatus === "Active" ? "Inactive" : "Active"; // Toggle status
       const response = await fetch(
-        `http://localhost:8000/api/users/employees/${id}`,
+        `${import.meta.env.VITE_BASEURL}/api/users/employees/${id}`,
         {
           method: "PATCH",
           headers: {
@@ -123,7 +123,7 @@ export default function Employees() {
 
     try {
       const response = await fetch(
-        `http://localhost:8000/api/users/employees/${id}`,
+        `${import.meta.env.VITE_BASEURL}/api/users/employees/${id}`,
         {
           method: "DELETE",
           headers: {

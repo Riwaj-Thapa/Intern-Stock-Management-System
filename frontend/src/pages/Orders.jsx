@@ -28,9 +28,12 @@ function Orders() {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/api/orders", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BASEURL}/api/orders`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       if (!response.ok) throw new Error("Failed to fetch orders.");
 
@@ -50,9 +53,12 @@ function Orders() {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/api/products", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BASEURL}/api/products`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       if (!response.ok) throw new Error("Failed to fetch products.");
 
@@ -106,7 +112,7 @@ function Orders() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const orderData = {
       orderNumber: formData.orderNumber,
       customer: formData.customer,
@@ -118,16 +124,16 @@ function Orders() {
       total: calculateTotal(),
       status: formData.status, // Include status in the request
     };
-  
+
     try {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("No token found");
-  
+
       const url = editingOrder
         ? `http://localhost:8000/api/orders/${editingOrder._id}`
         : "http://localhost:8000/api/orders";
       const method = editingOrder ? "PUT" : "POST";
-  
+
       const response = await fetch(url, {
         method,
         headers: {
@@ -136,9 +142,9 @@ function Orders() {
         },
         body: JSON.stringify(orderData),
       });
-  
+
       if (!response.ok) throw new Error("Failed to save the order.");
-  
+
       fetchOrders();
       fetchProducts(); // Fetch products again to reflect quantity changes
       handleCloseModal();
@@ -147,7 +153,6 @@ function Orders() {
       setError("Failed to save the order.");
     }
   };
-  
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -181,70 +186,76 @@ function Orders() {
       )}
 
       <div className="bg-white rounded-lg shadow overflow-hidden">
-      <table className="min-w-full divide-y divide-gray-200">
-  <thead className="bg-gray-50">
-    <tr>
-      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-        Order Number
-      </th>
-      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-        Customer
-      </th>
-      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-        Total
-      </th>
-      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-        Status
-      </th>
-      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-        Actions
-      </th>
-    </tr>
-  </thead>
-  <tbody className="bg-white divide-y divide-gray-200">
-    {orders.map((order) => (
-      <tr key={order._id}>
-        <td className="px-6 py-4 whitespace-nowrap">{order.orderNumber}</td>
-        <td className="px-6 py-4 whitespace-nowrap">{order.customer}</td>
-        <td className="px-6 py-4 whitespace-nowrap">${order.total.toFixed(2)}</td>
-        <td className="px-6 py-4 whitespace-nowrap">
-          <span
-            className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-              order.status === "Completed"
-                ? "bg-green-100 text-green-800"
-                : order.status === "Cancelled"
-                ? "bg-red-100 text-red-800"
-                : "bg-yellow-100 text-yellow-800"
-            }`}
-          >
-            {order.status}
-          </span>
-        </td>
-        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-          <button
-            onClick={() => {
-              setEditingOrder(order);
-              setFormData({
-                ...order,
-                items: order.items.map((item) => ({
-                  product: item.product._id,
-                  quantity: item.quantity,
-                  price: item.price,
-                })),
-              });
-              setIsModalOpen(true);
-            }}
-            className="text-indigo-600 hover:text-indigo-900 mr-3"
-          >
-            Edit
-          </button>
-        </td>
-      </tr>
-    ))}
-  </tbody>
-</table>
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Order Number
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Customer
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Total
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Status
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {orders.map((order) => (
+              <tr key={order._id}>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {order.orderNumber}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {order.customer}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  ${order.total.toFixed(2)}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <span
+                    className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                      order.status === "Completed"
+                        ? "bg-green-100 text-green-800"
+                        : order.status === "Cancelled"
+                        ? "bg-red-100 text-red-800"
+                        : "bg-yellow-100 text-yellow-800"
+                    }`}
+                  >
+                    {order.status}
+                  </span>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <button
+                    onClick={() => {
+                      setEditingOrder(order);
+                      setFormData({
+                        ...order,
+                        items: order.items.map((item) => ({
+                          product: item.product._id,
+                          quantity: item.quantity,
+                          price: item.price,
+                        })),
+                      });
+                      setIsModalOpen(true);
+                    }}
+                    className="text-indigo-600 hover:text-indigo-900 mr-3"
+                  >
+                    Edit
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-             <Modal
+      <Modal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         title={editingOrder ? "Edit Order" : "New Order"}
