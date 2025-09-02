@@ -32,14 +32,18 @@ function Dashboard() {
       navigate("/login"); // Redirect to login page if no token
       return;
     }
+    console.log("VITE_BASEURL:", import.meta.env.VITE_BASEURL);
     fetchDashboardData(token); // Proceed with data fetch if token exists
   }, [navigate]);
 
   const fetchDashboardData = async (token) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_BASEURL}/api/dashboard`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BASEURL}/api/dashboard`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       if (!response.ok) {
         throw new Error(`Error fetching data: ${response.status}`);
       }
