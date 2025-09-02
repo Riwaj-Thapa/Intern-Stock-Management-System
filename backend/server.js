@@ -17,14 +17,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 
-app.use(
-  cors({
-    origin: "https://intern-stock-management-system-maz3.vercel.app", // your frontend
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-)
-
+app.use(cors());
 app.use("/uploads", express.static("uploads"));
 
 // Routes
