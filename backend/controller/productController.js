@@ -1,4 +1,6 @@
+import imagekit from "../config/imageKit.js";
 import Product from "../models/Product.js";
+
 
 // Middleware for checking roles
 const isAdmin = (req) => req.user.role === "admin";
@@ -16,28 +18,39 @@ export const createProduct = async (req, res) => {
   if (!isAdmin(req)) {
     return res.status(403).json({ message: "Access denied. Only admins can create products." });
   }
+
   try {
     const { name, sku, quantity, price, category, supplier } = req.body;
-    const image = req.file?.filename; 
-    const imageUrl = image ? `${req.protocol}://${req.get('host')}/uploads/${image}` : null;
+
+    // Upload image to ImageKit if file exists
+    let imageUrl = null;
+    if (req.file) {
+      const result = await imagekit.upload({
+        file: req.file.buffer,             // Multer memory buffer
+        fileName: `product_${Date.now()}`, // optional custom name
+        folder: "/products",               // optional folder
+      });
+      imageUrl = result.url;
+    }
 
     const product = new Product({
-        name,
-        sku,
-        quantity,
-        price,
-        category,
-        supplier,
-        image:imageUrl,
+      name,
+      sku,
+      quantity,
+      price,
+      category,
+      supplier,
+      image: imageUrl,
     });
 
     const savedProduct = await product.save();
     res.status(201).json(savedProduct);
-} catch (error) {
-    res.status(500).json({ error: error.message });
-}
-};
 
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+};
 export const updateProduct = async (req, res) => {
 
   try {

@@ -8,7 +8,7 @@ import {
 
 import { validateToken, authorizeAdmin } from '../middleware/authMiddleware.js';
 
-import upload from "../middleware/multerConfig.js";
+import { upload } from "../middleware/multerConfig.js";
 
 const router = express.Router();
 

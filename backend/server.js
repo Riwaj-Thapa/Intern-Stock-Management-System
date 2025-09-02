@@ -18,7 +18,6 @@ const app = express();
 app.use(express.json());
 
 app.use(cors());
-app.use("/uploads", express.static("uploads"));
 
 // Routes
 app.use("/api/users", userRoutes); // User routes for admin and employee
