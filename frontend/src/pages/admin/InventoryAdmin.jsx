@@ -209,28 +209,28 @@ const InventoryAdmin = () => {
         <table className="w-[80%] divide-y divide-gray-200 mx-auto">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Image
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Product Name
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 SKU
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Quantity
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Price
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Category
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Supplier
               </th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Actions
               </th>
             </tr>
@@ -250,9 +250,9 @@ const InventoryAdmin = () => {
                     <span>No Image</span>
                   )}
                 </td>
-                <td className="px-4 py-4 whitespace-nowrap">{item.name}</td>
-                <td className="px-4 py-4 whitespace-nowrap">{item.sku}</td>
-                <td className="px-4 py-4 whitespace-nowrap">
+                <td className="px-6 py-4 whitespace-nowrap">{item.name}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{item.sku}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
                   <span
                     className={`${
                       item.quantity < 10
@@ -264,12 +264,12 @@ const InventoryAdmin = () => {
                   </span>
                 </td>
 
-                <td className="px-4 py-4 whitespace-nowrap">${item.price}</td>
-                <td className="px-4 py-4 whitespace-nowrap">{item.category}</td>
-                <td className="px-4 py-4 whitespace-nowrap">
+                <td className="px-6 py-4 whitespace-nowrap">${item.price}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{item.category}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
                   {item.supplier?.name || "Unknown"}
                 </td>
-                <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   <button
                     onClick={() => handleEdit(item)}
                     className="text-indigo-600 hover:text-indigo-900 mr-3"
