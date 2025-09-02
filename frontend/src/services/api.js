@@ -1,4 +1,5 @@
-const API_BASE_URL = 'http://localhost:8000/api'; // Update with your backend API base URL
+
+const API_BASE_URL = `${import.meta.env.VITE_BASEURL}/api`; // Update with your backend API base URL
 
 // Helper function for API requests
 const apiRequest = async (endpoint, method, body = null, isAuthRequired = false) => {
